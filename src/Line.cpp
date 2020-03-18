@@ -12,7 +12,8 @@ Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
 		this->C = -x1;
 		if (type == RL) {
 			R = (y1 < y2) ? y1 : (-INF);
-			S = (y1 < y2) ? (INF) : y2;
+			//S = (y1 < y2) ? (INF) : y2;
+			S = (y1 < y2) ? (INF) : y1;
 		} else if (type == LS) {
 			R = (y1 < y2) ? y1 : y2;
 			S = (y1 < y2) ? y2 : y1;
@@ -24,7 +25,8 @@ Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
 		this->C = y1 - A * x1;
 		if (type == RL) {
 			R = (x1 < x2) ? x1 : (-INF);
-			S = (x1 < x2) ? (INF) : x2;
+			//S = (x1 < x2) ? (INF) : x2;
+			S = (x1 < x2) ? (INF) : x1;
 		} else if (type == LS) {
 			R = (x1 < x2) ? x1 : x2;
 			S = (x1 < x2) ? x2 : x1;

@@ -68,6 +68,8 @@ int main(int argc, char* argv[]) {
 	for (auto p = pc.getIntersectPoints()->begin(); p != pc.getIntersectPoints()->end(); p++) {
 		cout << (p->getX()) << "," << (p->getY()) << endl;
 	}
+	in.close();
+	out.close();
 	return 0;
 
 }

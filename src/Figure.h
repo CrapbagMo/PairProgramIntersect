@@ -4,7 +4,7 @@
 #include <vector>
 #include "Point.h"
 
-#define INF 1000000.0
+#define INF 1000000000.0
 using namespace std;
 
 class Figure {
