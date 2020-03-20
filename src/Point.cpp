@@ -10,17 +10,18 @@ Point::Point(double x, double y) {
 }
 
 bool Point::operator==(const Point& point) const {
-	return fabs(this->x - point.x) < EPS && fabs(this->y - point.y) < EPS;
+	return fabs(this->x - point.x) <= EPS && fabs(this->y - point.y) <= EPS;
+	//this->x == point.x && y...
 }
 
 bool Point::operator<(const Point& point) const {
-	if ((point.x - this->x) > EPS) {
+	if ((point.x - this->x) >= EPS) {
 		return true;
 	}
-	if ((this->x - point.x) > EPS) {
+	if ((this->x - point.x) >= EPS) {
 		return false;
 	}
-	if ((point.y - this->y) > EPS) {
+	if ((point.y - this->y) >= EPS) {
 		return true;
 	}
 	return false;

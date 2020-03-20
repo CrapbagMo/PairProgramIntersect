@@ -12,7 +12,6 @@ Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
 		this->C = -x1;
 		if (type == RL) {
 			R = (y1 < y2) ? y1 : (-INF);
-			//S = (y1 < y2) ? (INF) : y2;
 			S = (y1 < y2) ? (INF) : y1;
 		} else if (type == LS) {
 			R = (y1 < y2) ? y1 : y2;
@@ -20,12 +19,12 @@ Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
 		}
 
 	} else {
-		this->A = (double(y1) - double(y2)) / (double(x1) - double(x2));
-		this->B = -1;
-		this->C = y1 - A * x1;
+		this->A = double(y1) - double(y2);
+		this->B = double(x2) - double(x1);
+		this->C = double(x1) * double(y2) - double(x2) * double(y1);
+
 		if (type == RL) {
 			R = (x1 < x2) ? x1 : (-INF);
-			//S = (x1 < x2) ? (INF) : x2;
 			S = (x1 < x2) ? (INF) : x1;
 		} else if (type == LS) {
 			R = (x1 < x2) ? x1 : x2;
@@ -52,7 +51,8 @@ set<Point> Line::intersect(Figure* figure) {
 		A2 = line->getA(); B2 = line->getB(); C2 = line->getC();
 		//((B1*C2-B2*C1)/(A1*B2-A2*B1)£¬(A2*C1-A1*C2)/(A1*B2-A2*B1))
 		//((b1*c2-b2*c1)/(a1*b2-a2*b1)£¬(a2*c1-a1*c2)/(a1*b2-a2*b1))
-		if (A1 * B2 != A2 * B1) {
+		if (fabs(A1 * B2 - A2 * B1) >= EPS) {
+			//A1 * B2 != A2 * B1
 			x = (B1 * C2 - B2 * C1) / (A1 * B2 - A2 * B1);
 			y = (A2 * C1 - A1 * C2) / (A1 * B2 - A2 * B1);
 			Point tP(x, y);
@@ -66,7 +66,8 @@ set<Point> Line::intersect(Figure* figure) {
 		a = circle->getX();
 		b = circle->getY();
 		r = circle->getR();
-		if (B != 0) {
+		if (fabs(B) > EPS) {
+			//B != 0
 			k = -A / B;
 			m = -C / B;
 
@@ -78,7 +79,8 @@ set<Point> Line::intersect(Figure* figure) {
 			tC = a * a + (b - m) * (b - m) - r * r;
 
 			Delta = tB * tB - 4 * tA * tC;
-			if (Delta > 0) {
+			if (Delta >= EPS) {
+				//Delta > 0
 				x = (-tB + sqrt(Delta)) / (2 * tA);
 				y = k * x + m;
 				Point tP(x, y);
@@ -93,7 +95,9 @@ set<Point> Line::intersect(Figure* figure) {
 					points.insert(tP0);
 				}
 
-			} else if (Delta == 0) {
+			} else if (Delta >= -EPS) {
+				//Delta == 0
+				Delta = fabs(Delta);
 				x = -tB / (2 * tA);
 				y = k * x + m;
 				Point tP(x, y);
@@ -123,11 +127,12 @@ bool Line::contain(Point point) {
 	double x = point.getX();
 	double y = point.getY();
 
-	if (B == 0) {
+	if (fabs(B) <= EPS) {
+		//B == 0
 		//parallel to y
-		return (R <= y && y <= S);
+		return (R <= y + EPS && y <= S + EPS);
 	} else {
-		return (R <= x && x <= S);
+		return (R <= x + EPS && x <= S + EPS);
 	}
 	return false;
 }

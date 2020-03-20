@@ -31,7 +31,7 @@ set<Point> Circle::intersect(Figure* figure) {
 		E2 = -2 * y2;
 		F2 = x2 * x2 + y2 * y2 - r2 * r2;
 
-		if (dis <= r1 + r2 && dis >= abs(r1 - r2)) {
+		if (dis - EPS <= r1 + r2 && dis + EPS >= fabs(r1 - r2)) {
 			points = Line(D1 - D2, E1 - E2, F1 - F2).intersect(this);
 		}
 	}

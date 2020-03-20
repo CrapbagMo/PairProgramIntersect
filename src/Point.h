@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#define EPS (0.00000001)
+#define EPS (0.00000000001)
 
 class Point {
 public:
