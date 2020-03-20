@@ -217,5 +217,65 @@ namespace UnitTest1
 			int count = pc.countIntersectionPoints();
 			Assert::AreEqual(count, 0);
 		}
+
+		TEST_METHOD(TestMethod22)
+		{
+			// 线段 圆 不相交
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(1, 1, 2, 2, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 0);
+		}
+
+		TEST_METHOD(TestMethod23)
+		{
+			// 线段 圆 相交
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(1, 1, 5, 6, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod24)
+		{
+			// 线段 圆 不相交
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(7, 8, 5, 6, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 0);
+		}
+
+		TEST_METHOD(TestMethod25)
+		{
+			// 线段 圆 一个点
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(2, 3, 4, 0, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod26)
+		{
+			// 线段 圆 相交两个点
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(-4, 0, 0, 4, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 2);
+		}
+
+		TEST_METHOD(TestMethod27)
+		{
+			// 线段 圆 相切
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(-1, 4, 3, 4, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
 	};
 }
