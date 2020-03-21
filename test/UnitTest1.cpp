@@ -6,7 +6,6 @@
 #include "../intersect/Line.h"
 #include "../intersect/Point.h"
 
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1
@@ -277,5 +276,27 @@ namespace UnitTest1
 			int count = pc.countIntersectionPoints();
 			Assert::AreEqual(count, 1);
 		}
+
+		TEST_METHOD(TestMethod28)
+		{ 
+			// 线段 圆 相交
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(0, 4, 0, 6, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod29)
+		{
+			// 线段 圆 相交
+			PlaneContainer pc;
+			pc.insert(new Circle(0, 0, 4));
+			pc.insert(new Line(4, 0, 4, 1, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+
 	};
 }
