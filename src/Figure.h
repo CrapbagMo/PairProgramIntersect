@@ -1,10 +1,11 @@
 #pragma once
+#define INF (1000000000.0)
+
 #include <typeinfo>
 #include <set>
 #include <vector>
-#include "Point.h"
 
-#define INF (1000000000.0)
+#include "Point.h"
 
 using namespace std;
 

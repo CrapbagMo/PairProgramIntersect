@@ -9,9 +9,9 @@ class Figure;
 class PlaneContainer {
 public:
 	PlaneContainer();
-	void insert(Figure* figure);
-	int countIntersectionPoints();
-	set<Point>* getIntersectPoints();
+	virtual	void insert(Figure* figure);
+	virtual	int countIntersectionPoints();
+	virtual	set<Point>* getIntersectPoints();
 	~PlaneContainer() {
 		cout << "PlaneContainer destroy" << endl;
 		delete intersetionPoints;
