@@ -3,7 +3,10 @@
 #include <iostream>
 #include <istream>
 #include <fstream>
+
 #include "core.h"
+
+using namespace std;
 
 int main(int argc, char* argv[]) {
 	string inputPath = "";
@@ -79,12 +82,10 @@ int main(int argc, char* argv[]) {
 	for (auto p = pc->getIntersectPoints()->begin(); p != pc->getIntersectPoints()->end(); p++) {
 		cout << (p->getX()) << "," << (p->getY()) << endl;
 	}
+
+	delete pc;
 	in.close();
 	out.close();
-	while (true)
-	{
-		;
 
-	}
 	return 0;
 }

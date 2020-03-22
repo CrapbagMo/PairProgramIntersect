@@ -1,4 +1,5 @@
 #pragma once
+
 #define EPS (0.00000000001)
 
 #include <math.h>

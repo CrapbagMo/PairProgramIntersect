@@ -359,3 +359,6 @@ MigrationBackup/
 /bin/intersect.lib
 /bin/intersect.exp
 /CodeCoverage.cov
+/bin/core.lib
+/bin/core.exp
+/mainForDLL.cpp

@@ -1,10 +1,10 @@
 ﻿#include "pch.h"
 #include "CppUnitTest.h"
-#include "../intersect/PlaneContainer.h"
-#include "../intersect/Circle.h"
-#include "../intersect/Figure.h"
-#include "../intersect/Line.h"
-#include "../intersect/Point.h"
+#include "../src/PlaneContainer.h"
+#include "../src/Circle.h"
+#include "../src/Figure.h"
+#include "../src/Line.h"
+#include "../src/Point.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -13,7 +13,7 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		
+
 		TEST_METHOD(TestMethod1)
 		{	// 两直线相交
 			PlaneContainer pc;
@@ -136,7 +136,7 @@ namespace UnitTest1
 			int count = pc.countIntersectionPoints();
 			Assert::AreEqual(count, 0);
 		}
-		
+
 		TEST_METHOD(TestMethod14)
 		{
 			// 两射线不相交
@@ -278,7 +278,7 @@ namespace UnitTest1
 		}
 
 		TEST_METHOD(TestMethod28)
-		{ 
+		{
 			// 线段 圆 相交
 			PlaneContainer pc;
 			pc.insert(new Circle(0, 0, 4));
@@ -297,6 +297,64 @@ namespace UnitTest1
 			Assert::AreEqual(count, 1);
 		}
 
+		TEST_METHOD(TestMethod30)
+		{
+			// 射线 射线 一个交点
+			PlaneContainer pc;
+			pc.insert(new Line(0, 0, 1, 1, RL));
+			pc.insert(new Line(0, 0, -1, -1, RL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod31)
+		{
+			// 射线 线段 一个交点
+			PlaneContainer pc;
+			pc.insert(new Line(0, 0, 1, 1, LS));
+			pc.insert(new Line(0, 0, -1, -1, RL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod32)
+		{
+			// 线段 线段 一个交点
+			PlaneContainer pc;
+			pc.insert(new Line(0, 0, 1, 1, LS));
+			pc.insert(new Line(0, 0, -1, -1, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+		TEST_METHOD(TestMethod33)
+		{
+			// 射线 射线 无交点
+			PlaneContainer pc;
+			pc.insert(new Line(1, 1, 2, 2, RL));
+			pc.insert(new Line(0, 0, -1, -1, RL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 0);
+		}
+
+		TEST_METHOD(TestMethod34)
+		{
+			// 射线 线段 无交点
+			PlaneContainer pc;
+			pc.insert(new Line(1, 1, 2, 2, LS));
+			pc.insert(new Line(0, 0, -1, -1, RL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 0);
+		}
+
+		TEST_METHOD(TestMethod35)
+		{
+			// 线段 线段 无交点
+			PlaneContainer pc;
+			pc.insert(new Line(1, 1, 2, 2, LS));
+			pc.insert(new Line(0, 0, -1, -1, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 0);
+		}
 
 	};
 }
