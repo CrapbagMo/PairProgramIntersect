@@ -6,13 +6,14 @@ Circle::Circle(int x, int y, int r) {
 	this->r = r;
 }
 
-set<Point> Circle::intersect(Figure* figure) {
+std::set<Point> Circle::intersect(Figure* figure) {
 
-	set<Point> points;
+	std::set<Point> points;
 	if (typeid(*figure) == typeid(Line)) {
 		Line* line = (Line*)figure;
 		points = line->intersect(this);
-	} else if (typeid(*figure) == typeid(Circle)) {
+	}
+	else if (typeid(*figure) == typeid(Circle)) {
 		Circle* circle = (Circle*)figure;
 		double x1, x2, y1, y2, r1, r2;
 		double D1, D2, E1, E2, F1, F2, dis;
