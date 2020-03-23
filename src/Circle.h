@@ -3,6 +3,7 @@
 #include "Figure.h"
 #include "Line.h"
 #include "Point.h"
+#include <regex>
 
 class Circle :public Figure {
 public:

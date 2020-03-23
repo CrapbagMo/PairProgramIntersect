@@ -1,10 +1,10 @@
 ﻿#include "pch.h"
 #include "CppUnitTest.h"
-#include "../src/PlaneContainer.h"
-#include "../src/Circle.h"
-#include "../src/Figure.h"
-#include "../src/Line.h"
-#include "../src/Point.h"
+#include "../intersect/PlaneContainer.h"
+#include "../intersect/Circle.h"
+#include "../intersect/Figure.h"
+#include "../intersect/Line.h"
+#include "../intersect/Point.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -14,6 +14,7 @@ namespace UnitTest1
 	{
 	public:
 
+		/************函数正常功能测试*************/
 		TEST_METHOD(TestMethod1)
 		{	// 两直线相交
 			PlaneContainer pc;
@@ -297,6 +298,8 @@ namespace UnitTest1
 			Assert::AreEqual(count, 1);
 		}
 
+		/************特殊情况*****************/
+
 		TEST_METHOD(TestMethod30)
 		{
 			// 射线 射线 一个交点
@@ -354,6 +357,37 @@ namespace UnitTest1
 			pc.insert(new Line(0, 0, -1, -1, LS));
 			int count = pc.countIntersectionPoints();
 			Assert::AreEqual(count, 0);
+		}
+
+		TEST_METHOD(TestMethod36)
+		{
+			// 精度测试
+			PlaneContainer pc;
+			pc.insert(new Line(0, -100000, 1, 100000, SL));
+			pc.insert(new Line(0, 0, 0, 1, SL));
+			pc.insert(new Line(0, -99999, 1, -99999, SL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 3);
+		}
+
+		TEST_METHOD(TestMethod37)
+		{
+			// 两线段在同一直线上 只有一点重合
+			PlaneContainer pc;
+			pc.insert(new Line(-1, -1, 3, 3, LS));
+			pc.insert(new Line(3, 3, 9, 9, LS));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
+		}
+
+		TEST_METHOD(TestMethod38)
+		{
+			// 两射线在同一直线上 只有一点重合
+			PlaneContainer pc;
+			pc.insert(new Line(0, 0, -5, -5, RL));
+			pc.insert(new Line(0, 0, 9, 9, RL));
+			int count = pc.countIntersectionPoints();
+			Assert::AreEqual(count, 1);
 		}
 
 	};
