@@ -1,6 +1,6 @@
 #pragma once
 
-#define EPS (0.00000000001)
+#define EPS (0.0000000000001)
 
 #include <math.h>
 

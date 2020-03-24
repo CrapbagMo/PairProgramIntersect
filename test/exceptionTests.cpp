@@ -8,32 +8,33 @@
 #include "../intersect/core.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
+extern PlaneContainer* pc;
 namespace UnitTest2
 {
 	TEST_CLASS(UnitTest2)
 	{
 	public:
 		
+		
 		TEST_METHOD(TestMethod1)
 		{	// 格式错误
-			
 			int res = add_Figure("acsd");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod2)
 		{	// 格式错误
-			
 			int res = add_Figure("C 5 3 -2 1");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod3)
 		{	// 格式错误
-			
 			int res = add_Figure("L -5 3 -2 0 4");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod4)
@@ -41,6 +42,7 @@ namespace UnitTest2
 			
 			int res = add_Figure("R 5 -3 2");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod5)
@@ -48,6 +50,7 @@ namespace UnitTest2
 			
 			int res = add_Figure("c 5 -3 2");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod6)
@@ -55,13 +58,14 @@ namespace UnitTest2
 			
 			int res = add_Figure("S 5 -3 2 0-1\n");
 			Assert::AreEqual(res, -1);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod7)
 		{	// 正常
-			
 			int res = add_Figure("R 5 -3 2 3");
 			Assert::AreEqual(res, 0);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod8)
@@ -69,13 +73,7 @@ namespace UnitTest2
 			
 			int res = add_Figure("C 5 -3 3\n");
 			Assert::AreEqual(res, 0);
-		}
-
-		TEST_METHOD(TestMethod9)
-		{	// 正常
-			
-			int res = add_Figure("R 5 -3 2 3\n");
-			Assert::AreEqual(res, 0);
+			delete(pc);
 		}
 
 		TEST_METHOD(TestMethod10)

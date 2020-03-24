@@ -2,9 +2,9 @@
 #include <string>
 #include <math.h>
 Line::Line(int x1, int y1, int x2, int y2, LineType type) {
-
-	if (abs(x1) > 100000 || abs(x2) > 100000 ||
-		abs(y1) > 100000 || abs(y2) > 100000) {
+	
+	if (abs(x1) > 100000 || abs(x2) > 100000 || 
+		abs(y1) > 100000 || abs(y2) > 100000 ) {
 		throw 1;
 	}
 	else if (x1 == x2 && y1 == y2) {
@@ -77,14 +77,14 @@ std::set<Point> Line::intersect(Figure* figure) {
 			double R1, S1;
 			R1 = line->getR();
 			S1 = line->getS();
-			if (((R1 + EPS < R) && (R + EPS < S1)) ||
-				((R1 + EPS < S) && (S + EPS < S1))) {
+			if (S1 > R && R1 <= R || 
+				R1 < S &&  R <= R1) {
 				//R1<R<S1 or R1<S<S1 (parallel to y should be thought)
 				//1st. endless intersection points. we should throw an Exception.
 				// Æ½ÐÐÓÚY
 				throw 4;
 			}
-			else if (fabs(R1 - S) <= EPS || fabs(S1 - R) <= EPS) {
+			else if (R1 == S || S1 == R) {
 				//R1 == S or R == S1
 				//2nd. only one intersection point
 				double t1, t2;
