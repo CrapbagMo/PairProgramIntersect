@@ -1,6 +1,14 @@
 #include "Circle.h"
 
 Circle::Circle(int x, int y, int r) {
+
+	if (r <= 0) {
+		throw 3;
+	}
+	else if (abs(x) > 100000 || abs(y) > 100000 || r > 100000) {
+		throw 1;
+	}
+
 	this->x = x;
 	this->y = y;
 	this->r = r;
@@ -23,6 +31,11 @@ std::set<Point> Circle::intersect(Figure* figure) {
 		x2 = circle->getX();
 		y2 = circle->getY();
 		r2 = circle->getR();
+
+		if (x1 == x2 && y1 == y2 && r1 == r2) {
+			throw 4;
+		}
+
 		dis = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
 		dis = sqrt(dis);
 		D1 = -2 * x1;

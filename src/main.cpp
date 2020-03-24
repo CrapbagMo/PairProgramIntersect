@@ -3,7 +3,6 @@
 #include <iostream>
 #include <istream>
 #include <fstream>
-
 #include "core.h"
 
 using namespace std;
