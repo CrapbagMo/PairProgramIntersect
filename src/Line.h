@@ -3,10 +3,11 @@
 #include "Figure.h"
 #include "Circle.h"
 #include "Point.h"
+#include <regex>
 
 class Line :public Figure {
 public:
-	Line(int, int, int, int, LineType);
+	Line(int x1, int y1, int x2, int y2, LineType type);
 	Line(double, double, double);
 	std::set <Point> intersect(Figure*);
 	bool contain(Point);

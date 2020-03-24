@@ -1,7 +1,16 @@
 #include "Line.h"
 #include <string>
 #include <math.h>
-Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
+Line::Line(int x1, int y1, int x2, int y2, LineType type) {
+
+	if (abs(x1) > 100000 || abs(x2) > 100000 ||
+		abs(y1) > 100000 || abs(y2) > 100000) {
+		throw 1;
+	}
+	else if (x1 == x2 && y1 == y2) {
+		throw 2;
+	}
+
 	if (type == SL) {
 		R = -INF;
 		S = INF;
@@ -72,7 +81,8 @@ std::set<Point> Line::intersect(Figure* figure) {
 				((R1 + EPS < S) && (S + EPS < S1))) {
 				//R1<R<S1 or R1<S<S1 (parallel to y should be thought)
 				//1st. endless intersection points. we should throw an Exception.
-				;
+				// Æ½ÐÐÓÚY
+				throw 4;
 			}
 			else if (fabs(R1 - S) <= EPS || fabs(S1 - R) <= EPS) {
 				//R1 == S or R == S1
