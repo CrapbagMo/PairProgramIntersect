@@ -10,14 +10,12 @@
 #include "Circle.h"
 #include "Line.h"
 #include <string>
+#include <fstream>
 #include <sstream>
 
+static PlaneContainer* pc = nullptr;
+
+extern "C" CORE_API int add_Figure(std::string buf);
 /*extern "C" CORE_API PlaneContainer * create_PlaneContainer();
 extern "C" CORE_API Circle * create_Circle(int, int, int);
 extern "C" CORE_API Line * create_Line(int, int, int, int, LineType);*/
-
-extern "C" CORE_API int add_Figure(char*);
-extern "C" CORE_API void initial_PlaneContainer();
-extern "C" CORE_API void dispose_PlaneContainer();
-extern "C" CORE_API double* get_IntersectionPoints();
-extern "C" CORE_API int get_NumOfIntersectionPoints();
