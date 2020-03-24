@@ -2,9 +2,9 @@
 #include <string>
 #include <math.h>
 Line::Line(int x1, int y1, int x2, int y2, LineType type) {
-	
-	if (abs(x1) > 100000 || abs(x2) > 100000 || 
-		abs(y1) > 100000 || abs(y2) > 100000 ) {
+
+	if (abs(x1) > 100000 || abs(x2) > 100000 ||
+		abs(y1) > 100000 || abs(y2) > 100000) {
 		throw 1;
 	}
 	else if (x1 == x2 && y1 == y2) {

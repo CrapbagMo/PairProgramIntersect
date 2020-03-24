@@ -362,3 +362,6 @@ MigrationBackup/
 /bin/core.lib
 /bin/core.exp
 /mainForDLL.cpp
+/输出-生成.txt
+/GUI/GUI.csproj
+/GUI/Properties

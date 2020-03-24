@@ -4,8 +4,9 @@
 using namespace std;
 static PlaneContainer* pc = nullptr;
 
-CORE_API int add_Figure(std::string buf)
+CORE_API int add_Figure(char* str)
 {
+	string buf(str);
 	stringstream stream;
 	stream << buf;
 
@@ -24,55 +25,62 @@ CORE_API int add_Figure(std::string buf)
 		stream << buf;
 		stream >> type;
 		stream >> x1 >> y1 >> x2 >> y2;
+		Line* line = nullptr;
 		try {
-			pc->insert(new Line(x1, y1, x2, y2, LS));
+			line = new Line(x1, y1, x2, y2, LS);
 		}
 		catch (int exceptionType) {
 			return exceptionType;
 		}
+		pc->insert(line);
 	}
 	else if (regex_match(buf, rayREGEX)) {
 		stringstream stream;
 		stream << buf;
 		stream >> type;
 		stream >> x1 >> y1 >> x2 >> y2;
+		Line* line = nullptr;
 		try {
-			pc->insert(new Line(x1, y1, x2, y2, RL));
+			line = new Line(x1, y1, x2, y2, RL);
 		}
 		catch (int exceptionType) {
 			return exceptionType;
 		}
+		pc->insert(line);
 	}
 	else if (regex_match(buf, lineREGEX)) {
 		stringstream stream;
 		stream << buf;
 		stream >> type;
 		stream >> x1 >> y1 >> x2 >> y2;
+		Line* line = nullptr;
 		try {
-			pc->insert(new Line(x1, y1, x2, y2, SL));
+			line = new Line(x1, y1, x2, y2, SL);
 		}
 		catch (int exceptionType) {
 			return exceptionType;
 		}
+		pc->insert(line);
 	}
 	else if (regex_match(buf, circleREGEX)) {
 		stringstream stream;
 		stream << buf;
 		stream >> type;
 		stream >> a >> b >> r;
+		Circle* circle = nullptr;
 		try {
-			pc->insert(new Circle(a, b, r));
+			circle = new Circle(a, b, r);
 		}
 		catch (int exceptionType) {
 			return exceptionType;
 		}
+		pc->insert(circle);
 	}
 	else {
 		return -1;
 	}
 	return 0;
 }
-
 /*CORE_API PlaneContainer* create_PlaneContainer()
 {
 	return new PlaneContainer();
@@ -87,8 +95,6 @@ CORE_API Line* create_Line(int x1, int y1, int x2, int y2, LineType type)
 {
 	return new Line(x1, y1, x2, y2, type);
 }*/
-
-
 
 CORE_API void initial_PlaneContainer()
 {
