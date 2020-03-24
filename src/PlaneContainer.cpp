@@ -9,7 +9,11 @@ PlaneContainer::PlaneContainer() {
 void PlaneContainer::insert(Figure* figure) {
 	for (auto fig = figures->begin(); fig != figures->end(); fig++) {
 		std::set<Point> tPoints = (*fig)->intersect(figure);
-		set_union(tPoints.begin(), tPoints.end(), intersetionPoints->begin(), intersetionPoints->end(), inserter(*intersetionPoints, (*intersetionPoints).begin()));
+		//set_union(tPoints.begin(), tPoints.end(), intersetionPoints->begin(), intersetionPoints->end(), inserter(*intersetionPoints, (*intersetionPoints).begin()));
+		for each (Point var in tPoints)
+		{
+			intersetionPoints->insert(var);
+		}
 	}
 	figures->push_back(figure);
 }
