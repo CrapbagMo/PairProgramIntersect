@@ -13,8 +13,7 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-
-		/************函数正常功能测试*************/
+		
 		TEST_METHOD(TestMethod1)
 		{	// 两直线相交
 			PlaneContainer pc;
@@ -137,7 +136,7 @@ namespace UnitTest1
 			int count = pc.countIntersectionPoints();
 			Assert::AreEqual(count, 0);
 		}
-
+		
 		TEST_METHOD(TestMethod14)
 		{
 			// 两射线不相交
@@ -279,7 +278,7 @@ namespace UnitTest1
 		}
 
 		TEST_METHOD(TestMethod28)
-		{
+		{ 
 			// 线段 圆 相交
 			PlaneContainer pc;
 			pc.insert(new Circle(0, 0, 4));
@@ -298,97 +297,6 @@ namespace UnitTest1
 			Assert::AreEqual(count, 1);
 		}
 
-		/************特殊情况*****************/
-
-		TEST_METHOD(TestMethod30)
-		{
-			// 射线 射线 一个交点
-			PlaneContainer pc;
-			pc.insert(new Line(0, 0, 1, 1, RL));
-			pc.insert(new Line(0, 0, -1, -1, RL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 1);
-		}
-
-		TEST_METHOD(TestMethod31)
-		{
-			// 射线 线段 一个交点
-			PlaneContainer pc;
-			pc.insert(new Line(0, 0, 1, 1, LS));
-			pc.insert(new Line(0, 0, -1, -1, RL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 1);
-		}
-
-		TEST_METHOD(TestMethod32)
-		{
-			// 线段 线段 一个交点
-			PlaneContainer pc;
-			pc.insert(new Line(0, 0, 1, 1, LS));
-			pc.insert(new Line(0, 0, -1, -1, LS));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 1);
-		}
-		TEST_METHOD(TestMethod33)
-		{
-			// 射线 射线 无交点
-			PlaneContainer pc;
-			pc.insert(new Line(1, 1, 2, 2, RL));
-			pc.insert(new Line(0, 0, -1, -1, RL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 0);
-		}
-
-		TEST_METHOD(TestMethod34)
-		{
-			// 射线 线段 无交点
-			PlaneContainer pc;
-			pc.insert(new Line(1, 1, 2, 2, LS));
-			pc.insert(new Line(0, 0, -1, -1, RL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 0);
-		}
-
-		TEST_METHOD(TestMethod35)
-		{
-			// 线段 线段 无交点
-			PlaneContainer pc;
-			pc.insert(new Line(1, 1, 2, 2, LS));
-			pc.insert(new Line(0, 0, -1, -1, LS));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 0);
-		}
-
-		TEST_METHOD(TestMethod36)
-		{
-			// 精度测试
-			PlaneContainer pc;
-			pc.insert(new Line(0, -100000, 1, 100000, SL));
-			pc.insert(new Line(0, 0, 0, 1, SL));
-			pc.insert(new Line(0, -99999, 1, -99999, SL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 3);
-		}
-
-		TEST_METHOD(TestMethod37)
-		{
-			// 两线段在同一直线上 只有一点重合
-			PlaneContainer pc;
-			pc.insert(new Line(-1, -1, 3, 3, LS));
-			pc.insert(new Line(3, 3, 9, 9, LS));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 1);
-		}
-
-		TEST_METHOD(TestMethod38)
-		{
-			// 两射线在同一直线上 只有一点重合
-			PlaneContainer pc;
-			pc.insert(new Line(0, 0, -5, -5, RL));
-			pc.insert(new Line(0, 0, 9, 9, RL));
-			int count = pc.countIntersectionPoints();
-			Assert::AreEqual(count, 1);
-		}
 
 	};
 }

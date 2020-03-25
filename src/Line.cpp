@@ -1,16 +1,7 @@
 #include "Line.h"
 #include <string>
 #include <math.h>
-Line::Line(int x1, int y1, int x2, int y2, LineType type) {
-	
-	if (abs(x1) > 100000 || abs(x2) > 100000 || 
-		abs(y1) > 100000 || abs(y2) > 100000 ) {
-		throw 1;
-	}
-	else if (x1 == x2 && y1 == y2) {
-		throw 2;
-	}
-
+Line::Line(int x1, int y1, int x2, int y2, enum LineType type) {
 	if (type == SL) {
 		R = -INF;
 		S = INF;
@@ -22,14 +13,12 @@ Line::Line(int x1, int y1, int x2, int y2, LineType type) {
 		if (type == RL) {
 			R = (y1 < y2) ? y1 : (-INF);
 			S = (y1 < y2) ? (INF) : y1;
-		}
-		else if (type == LS) {
+		} else if (type == LS) {
 			R = (y1 < y2) ? y1 : y2;
 			S = (y1 < y2) ? y2 : y1;
 		}
 
-	}
-	else {
+	} else {
 		this->A = double(y1) - double(y2);
 		this->B = double(x2) - double(x1);
 		this->C = double(x1) * double(y2) - double(x2) * double(y1);
@@ -37,8 +26,7 @@ Line::Line(int x1, int y1, int x2, int y2, LineType type) {
 		if (type == RL) {
 			R = (x1 < x2) ? x1 : (-INF);
 			S = (x1 < x2) ? (INF) : x1;
-		}
-		else if (type == LS) {
+		} else if (type == LS) {
 			R = (x1 < x2) ? x1 : x2;
 			S = (x1 < x2) ? x2 : x1;
 		}
@@ -53,9 +41,9 @@ Line::Line(double A, double B, double C) {
 	S = INF;
 }
 
-std::set<Point> Line::intersect(Figure* figure) {
+set<Point> Line::intersect(Figure* figure) {
 	double x, y;
-	std::set<Point> points;
+	set<Point> points;
 	if (typeid(*figure) == typeid(Line)) {
 		Line* line = (Line*)figure;
 		double A1, B1, C1, A2, B2, C2;
@@ -72,42 +60,7 @@ std::set<Point> Line::intersect(Figure* figure) {
 				points.insert(tP);
 			}
 		}
-		else if (fabs(A1 * C2 - A2 * C1) <= EPS) {
-			//overlap each other. 3 probable conditions:
-			double R1, S1;
-			R1 = line->getR();
-			S1 = line->getS();
-			if (S1 > R && R1 <= R || 
-				R1 < S &&  R <= R1) {
-				//R1<R<S1 or R1<S<S1 (parallel to y should be thought)
-				//1st. endless intersection points. we should throw an Exception.
-				// Æ½ÐÐÓÚY
-				throw 4;
-			}
-			else if (R1 == S || S1 == R) {
-				//R1 == S or R == S1
-				//2nd. only one intersection point
-				double t1, t2;
-				t1 = (fabs(R - S1) <= EPS) ? R : S;
-				t1 = (t1 > 0.0) ? floor(t1 + 0.5) : ceil(t1 - 0.5);
-
-				if (fabs(B) <= EPS)
-				{
-					t2 = calX(t1);
-					t2 = (t2 > 0.0) ? floor(t2 + 0.5) : ceil(t2 - 0.5);
-					points.insert(Point(t2, t1));
-				}
-				else {
-					t2 = calY(t1);
-					t2 = (t2 > 0.0) ? floor(t2 + 0.5) : ceil(t2 - 0.5);
-					points.insert(Point(t1, t2));
-				}
-
-			}
-			//3rd. no intersection points
-		}
-	}
-	else if (typeid(*figure) == typeid(Circle)) {
+	} else if (typeid(*figure) == typeid(Circle)) {
 		Circle* circle = (Circle*)figure;
 		double tA, tB, tC, a, b, r, k, m, Delta;
 		a = circle->getX();
@@ -142,8 +95,7 @@ std::set<Point> Line::intersect(Figure* figure) {
 					points.insert(tP0);
 				}
 
-			}
-			else if (Delta >= -EPS) {
+			} else if (Delta >= -EPS) {
 				//Delta == 0
 				Delta = fabs(Delta);
 				x = -tB / (2 * tA);
@@ -153,8 +105,7 @@ std::set<Point> Line::intersect(Figure* figure) {
 					points.insert(tP);
 				}
 			}
-		}
-		else {
+		} else {
 			x = m = -C / A;
 			y = b + sqrt(r * r - (m - a) * (m - a));
 			Point tP(x, y);
@@ -180,29 +131,10 @@ bool Line::contain(Point point) {
 		//B == 0
 		//parallel to y
 		return (R <= y + EPS && y <= S + EPS);
-	}
-	else {
+	} else {
 		return (R <= x + EPS && x <= S + EPS);
 	}
 	return false;
-}
-
-double Line::calX(double y)
-{
-	if (fabs(A) >= EPS) {
-		// A != 0
-		return (-C / A - B * y / A);
-	}
-	return INF;
-}
-
-double Line::calY(double x)
-{
-	if (fabs(B) >= EPS) {
-		// B != 0
-		return (-C / B - A * x / B);
-	}
-	return INF;
 }
 
 double Line::getA() {

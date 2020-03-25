@@ -2,14 +2,18 @@
 #include <algorithm>
 #include <iterator>
 PlaneContainer::PlaneContainer() {
-	figures = new  std::vector<Figure*>();
-	intersetionPoints = new  std::set<Point>();
+	figures = new vector<Figure*>();
+	intersetionPoints = new set<Point>();
 }
 
 void PlaneContainer::insert(Figure* figure) {
 	for (auto fig = figures->begin(); fig != figures->end(); fig++) {
-		std::set<Point> tPoints = (*fig)->intersect(figure);
-		set_union(tPoints.begin(), tPoints.end(), intersetionPoints->begin(), intersetionPoints->end(), inserter(*intersetionPoints, (*intersetionPoints).begin()));
+		set<Point> tPoints = (*fig)->intersect(figure);
+		//set_union(tPoints.begin(), tPoints.end(), intersetionPoints->begin(), intersetionPoints->end(), inserter(*intersetionPoints, (*intersetionPoints).begin()));
+		for each (Point var in tPoints)
+		{
+			intersetionPoints->insert(var);
+		}
 	}
 	figures->push_back(figure);
 }
@@ -18,6 +22,6 @@ int PlaneContainer::countIntersectionPoints() {
 	return intersetionPoints->size();
 }
 
-std::set<Point>* PlaneContainer::getIntersectPoints() {
+set<Point>* PlaneContainer::getIntersectPoints() {
 	return intersetionPoints;
 }

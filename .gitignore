@@ -355,13 +355,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-*.json
-/bin/intersect.lib
-/bin/intersect.exp
-/CodeCoverage.cov
-/bin/core.lib
-/bin/core.exp
-/mainForDLL.cpp
-/输出-生成.txt
-/GUI/GUI.csproj
-/GUI/Properties

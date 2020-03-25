@@ -1,15 +1,13 @@
 #pragma once
-
-#define EPS (0.0000000000001)
-
 #include <math.h>
+#define EPS (0.00000000001)
 
 class Point {
 public:
 	Point();
 	Point(double x, double y);
-	virtual	double getX()const;
-	virtual	double getY()const;
+	double getX()const;
+	double getY()const;
 	bool operator ==(const Point& point)const;
 	bool operator <(const Point& point)const;
 

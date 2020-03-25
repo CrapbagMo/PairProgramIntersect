@@ -1,27 +1,24 @@
 #pragma once
-
 #include "Figure.h"
 #include "Point.h"
 #include <algorithm>
 #include <iostream>
 
-class PlaneContainer
-{
+class Figure;
+
+class PlaneContainer {
 public:
 	PlaneContainer();
-	virtual	void insert(Figure* figure);
-	virtual	int countIntersectionPoints();
-	virtual std::set<Point>* getIntersectPoints();
-	virtual	~PlaneContainer() {
-		std::cout << "PlaneContainer destroy" << std::endl;
-		for (Figure* var : *figures) {
-			delete var;
-		}
+	void insert(Figure* figure);
+	int countIntersectionPoints();
+	set<Point>* getIntersectPoints();
+	~PlaneContainer() {
+		cout << "PlaneContainer destroy" << endl;
 		delete intersetionPoints;
 		delete figures;
 	}
 private:
-	std::set<Point>* intersetionPoints;
-	std::vector<Figure*>* figures;
+	set<Point>* intersetionPoints;
+	vector<Figure*>* figures;
 };
 
